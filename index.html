@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <div class="container">
+    <div class="content-inputs">
+      <div class="wrapper-inputs">
+        <label for="" class="form__label">Arquivo</label>
+        <input type="file" class="form__input" id="arquivo" placeholder="">
+
+        <label for="" class="form__label">Bit-R</label>
+        <input type="text" class="form__input" id="bit-r"  placeholder="" value="30">
+
+        <label for="" class="form__label">Quantidades de testes</label>
+        <input type="text" class="form__input" id="quant-teste" placeholder="" value="3">
+
+        <label for="" class="form__label">Min Frame Q1</label>
+        <input type="text" class="form__input" id="q1" placeholder="" value="50">
+
+        <label for="" class="form__label">Max Frame Q2</label>
+        <input type="text" class="form__input" id="q2" placeholder="" value="90">
+
+        <button type="button" id="calcular" >Calcular</button>
+      </div>
+    </div>
+
+    <div class="content-graficos-tabela">
+      <div class="wrap">
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+      </div>
+
+      <div class="wrap-table">
+        <table class="conversion-rate-table">
+          <thead class="table__head">
+            <tr class="table__headers">
+              <th class="header" scope="col">Frames</th>
+              <th class="header" scope="col">FIFO</th>
+              <th class="header" scope="col">Segunda Chance</th>
+              <th class="header" scope="col">NUR</th>
+              <th class="header" scope="col">MRU</th>
+            </tr>
+          </thead>
+          <tbody id="table__content">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script type="module"  src="./index.js"></script>
