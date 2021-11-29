@@ -56,20 +56,24 @@ function iniciarAlgortimos(grafico) {
       //Estrutura pra o grafico
       const dataEstrutura = [
         { 
+          label: 'FIFO',
           data: dataFIFO,
           borderColor: "red",
           fill: false
         }, { 
+          label: 'MRU',
           data: dataMRU,
           borderColor: "green",
           fill: false
         }, { 
+          label: 'Segunda Chance',
           data: dataSG,
           borderColor: "blue",
           fill: false
         }, { 
+          label: 'NUR',
           data: dataNUR,
-          borderColor: "pink",
+          borderColor: "orange",
           fill: false
         },
       ]
@@ -102,10 +106,13 @@ function iniciarAlgortimos(grafico) {
     type: "line",
     data: {
       labels: [],
-      datasets: []
+      datasets: [],
     },
     options: {
-      legend: {display: false}
+      legend: {
+        display: true,
+        position: 'bottom',
+      }
     }
   });
 
