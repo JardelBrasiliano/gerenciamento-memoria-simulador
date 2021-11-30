@@ -14,10 +14,14 @@ export const NUR = ({
   let acertos = 0;
   let faltas = 0;
 
-  const intervalosDeFrames = Math.round((MAX_FRAME_Q2 - MIN_FRAME_Q1) / (QUANTIDADES_DE_TESTES-1));
+  const intervalosDeFrames = Math.round((MAX_FRAME_Q2 - MIN_FRAME_Q1) / (QUANTIDADES_DE_TESTES))+1;
+  const numerosDeFrames = typeof(QUANTIDADES_DE_TESTES) === 'string' ? +intervalosDeFrames : QUANTIDADES_DE_TESTES.length;
 
-  for (let indexTeste = 0; indexTeste < QUANTIDADES_DE_TESTES; indexTeste++) {
-    const frameDoTesteAtual = MIN_FRAME_Q1 + (intervalosDeFrames*indexTeste)
+  let interV = MIN_FRAME_Q1;
+  for (let indexTeste = 0; indexTeste < numerosDeFrames; indexTeste++) {
+    const frameDoTesteAtual = typeof(QUANTIDADES_DE_TESTES) === 'string' ? interV : QUANTIDADES_DE_TESTES[indexTeste];
+    interV += +QUANTIDADES_DE_TESTES;
+
     const frame = new ReferenciaNUR();
     let cont = (MAX_REFERENCIAS_PARA_RESETAR-1);
 

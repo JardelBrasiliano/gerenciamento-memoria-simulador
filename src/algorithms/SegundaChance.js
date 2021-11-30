@@ -14,16 +14,19 @@ export const SegundaChance = ({
   let acertos = 0;
   let faltas = 0;
 
-  const intervalosDeFrames = Math.round((MAX_FRAME_Q2 - MIN_FRAME_Q1) / (QUANTIDADES_DE_TESTES-1));
+  const intervalosDeFrames = Math.round((MAX_FRAME_Q2 - MIN_FRAME_Q1) / (QUANTIDADES_DE_TESTES))+1;
+  const numerosDeFrames = typeof(QUANTIDADES_DE_TESTES) === 'string' ? +intervalosDeFrames : QUANTIDADES_DE_TESTES.length;
 
-  for (let indexTeste = 0; indexTeste < QUANTIDADES_DE_TESTES; indexTeste++) {
-    const frameDoTesteAtual = MIN_FRAME_Q1 + (intervalosDeFrames*indexTeste)
+  let interV = MIN_FRAME_Q1;
+  for (let indexTeste = 0; indexTeste < numerosDeFrames; indexTeste++) {
+    const frameDoTesteAtual = typeof(QUANTIDADES_DE_TESTES) === 'string' ? interV : QUANTIDADES_DE_TESTES[indexTeste];
+    interV += +QUANTIDADES_DE_TESTES;
+
     const frame = new ReferenciaSegundaChance();
     let cont = (MAX_REFERENCIAS_PARA_RESETAR-1);
 
     /** COMEÇO DO ALGORITMO - SEGUNDA CHANCE */
     for (let index = 0; index < separandoItens.length; index++) {
-
       const pagina = separandoItens[index];
       const paginaEstaNoFrame = frame.ListaCompleta.findIndex((e) => { 
         return e.index === pagina; 
@@ -31,7 +34,7 @@ export const SegundaChance = ({
 
       if(paginaEstaNoFrame !== -1) {
         if (frame.ListaCompleta[paginaEstaNoFrame].isRef === 0) {
-          frame.alterarRefPorIndex(paginaEstaNoFrame)
+          frame.alterarRefPorIndex(paginaEstaNoFrame);
         }
         acertos += 1;
       } else {
