@@ -24,27 +24,13 @@ class ReferenciaSegundaChance {
   }
 
   zerar() {
-    if (this.ListaCompleta.length > 0) {
-      for (let indexRef = 0; indexRef < this.ListaCompleta.length ; indexRef++) {
-        this.ListaCompleta[indexRef].zerarRef()
-      }
-    }
+    this.ListaCompleta.forEach((pagina) => {
+      pagina.zerarRef();
+    })
   }
 
   alterarRefPorIndex(indexRef) {
     this.ListaCompleta[indexRef].alterarRef();
-  }
-
-  verificaIgualdade() {
-    let total = 0;
-    if (this.ListaCompleta.length > 0) {
-      for (let indexRef = 0; indexRef < this.ListaCompleta.length ; indexRef++) {
-        if (this.ListaCompleta[indexRef].isRef === 1) {
-          total += 1;
-        }
-      }
-    }
-    return total === this.ListaCompleta.length;
   }
 
   referenciarEspacoFila(indexParaReferenciar) {
@@ -52,31 +38,29 @@ class ReferenciaSegundaChance {
     this.ListaCompleta.push(referencia);
   }
 
-  referenciarSemEspacoFila(indexParaReferenciar) {
-    let controleDeTroca = 0;
-    if (this.verificaIgualdade()) {
-      this.zerar();
-    }
-    const NovaListaDereferencias = [];
-    const finalDaFila = [];
+  referenciarSemEspacoFila(nomePagina) {
+    let achouMenor = false;
+    const novaLista = this.ListaCompleta.slice();
 
-    this.ListaCompleta.forEach((pagina) => {
-      if (controleDeTroca === 0) {
-        if (pagina.isRef === 0) {
-          controleDeTroca += 1; 
-        } else  {
-          const data = new Pagina(pagina.index, 0);  
-          finalDaFila.push(data);
-        }
-      } else if (controleDeTroca === 1) {
-          NovaListaDereferencias.push(pagina);
+    this.ListaCompleta.some((pagina) => {
+      if (pagina.isRef === 0) {
+        novaLista.shift();
+        achouMenor = true;
+        return true;
+      } else {
+        novaLista.shift();
+        const data = new Pagina(pagina.index, 0);
+        novaLista.push(data);
       }
     });
 
-    const data = new Pagina(indexParaReferenciar, 1);
-    const listFinalConcat = NovaListaDereferencias.concat(finalDaFila);
-    listFinalConcat.push(data);
-    this.ListaCompleta = listFinalConcat;
+    if (!achouMenor) {
+      novaLista.shift();
+    }
+
+    const novaPagina = new Pagina(nomePagina, 1);
+    this.ListaCompleta = novaLista;
+    this.ListaCompleta.push(novaPagina);
   }
 }
 
