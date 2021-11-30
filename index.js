@@ -128,5 +128,5 @@ function iniciarAlgortimos(grafico) {
     MAX_FRAME_Q2: 9,
   };
 
-  console.log('TESTE', SegundaChance(teste));
+  console.log('TESTE', NUR(teste));
 })();
